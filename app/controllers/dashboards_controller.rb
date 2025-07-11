@@ -7,7 +7,7 @@ class DashboardsController < ApplicationController
     elsif current_user.admin?
       load_admin_dashboard
     else
-      redirect_to videos_path, alert: "Access denied."
+      redirect_to videos_path
     end
   end
 

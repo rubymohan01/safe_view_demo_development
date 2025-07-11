@@ -6,15 +6,12 @@ Video.destroy_all
 OrganizationInvitation.destroy_all
 Policy.destroy_all
 
-# Create Organizations
 youth_org = Organization.create!(name: "Youth Network", status: :active)
-adult_org = Organization.create!(name: "Adults United", status: :active)
+united_kindness_org = Organization.create!(name: "United kindness", status: :active)
 
-# Add Policies
 youth_org.create_policy!(min_age: 13, parental_consent_required: true)
-adult_org.create_policy!(min_age: 18, parental_consent_required: false)
+united_kindness_org.create_policy!(min_age: 18, parental_consent_required: false)
 
-# Create Users
 User.create!(
   email: "super@admin.com",
   name: "Super Admin",
@@ -41,29 +38,27 @@ teen_user = User.create!(
   date_of_birth: 14.years.ago
 )
 
-adult_user = User.create!(
-  email: "adult@united.com",
-  name: 'Adult User',
+user_3 = User.create!(
+  email: "user1@united.com",
+  name: 'User1',
   password: "password",
   role: :user,
-  organization_id: adult_org.id,
+  organization_id: united_kindness_org.id,
   date_of_birth: 35.years.ago
 )
 
-# Create Channels
 kids_channel = Channel.create!(
   name: "Kids Channel",
   user: admin_youth,
   organization_id: youth_org.id
 )
 
-adult_channel = Channel.create!(
-  name: "Adult Channel",
-  user: adult_user,
-  organization_id: adult_org.id
+learning_channel = Channel.create!(
+  name: "learning",
+  user: user_3,
+  organization_id: united_kindness_org.id
 )
 
-# Child Videos
 Video.create!(
   title: "Learn to Share | Animated Kids Video",
   description: "A fun guide for kids on sharing and kindness.",
@@ -92,11 +87,10 @@ Video.create!(
   min_age: 13
 )
 
-# Adult Videos
 Video.create!(
   title: "TED Talk: The Power of Vulnerability – Brené Brown",
   description: "Insightful talk on psychology and connection.",
-  channel: adult_channel,
+  channel: learning_channel,
   youtube_url: "https://www.youtube.com/watch?v=iCvmsMzlF7o",
   visibility: :everyone,
   min_age: 18
@@ -105,7 +99,7 @@ Video.create!(
 Video.create!(
   title: "CrashCourse Philosophy: What is Justice?",
   description: "An introduction to philosophy's approach to justice.",
-  channel: adult_channel,
+  channel: learning_channel,
   youtube_url: "https://www.youtube.com/watch?v=kBdfcR-8hEY",
   visibility: :everyone,
   min_age: 18
