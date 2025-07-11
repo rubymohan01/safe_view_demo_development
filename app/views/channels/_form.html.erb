@@ -1,0 +1,19 @@
+<!-- app/views/channels/_form.html.erb -->
+<%= form_with(model: channel, local: true) do |f| %>
+  <div class="mb-3">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :organization_id, "Organization" %>
+    <%= f.collection_select :organization_id, Organization.all, :id, :name, { prompt: "Select Organization" }, class: "form-select" %>
+  </div>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

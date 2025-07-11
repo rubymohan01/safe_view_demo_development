@@ -1,0 +1,11 @@
+<!-- app/views/organization_invitations/accept.html.erb -->
+<div class="container mt-5">
+  <h3>Join <%= @invitation.organization.name %></h3>
+  <p>Email: <%= @invitation.email %></p>
+  <p>Invited by: <%= @invitation.user&.name || 'Admin' %></p>
+
+  <%= form_with url: confirm_organization_invite_path, method: :post, local: true do %>
+    <%= hidden_field_tag :token, @invitation.token %>
+    <%= submit_tag "Accept Invitation", class: "btn btn-success" %>
+  <% end %>
+</div>

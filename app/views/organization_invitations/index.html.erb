@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h3>Your Pending Invitations</h3>
+
+  <% if @invitations.any? %>
+    <ul class="list-group">
+      <% @invitations.each do |invite| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span><strong><%= invite.organization.name %></strong></span>
+          <% if invite.accepted %>
+            <%= link_to "Accept", accept_organization_invite_path(token: invite.token), class: "btn btn-primary btn-sm" %>
+          <% else %>
+            <span class="badge bg-success">Accepted</span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have no pending invitations.</p>
+  <% end %>
+</div>

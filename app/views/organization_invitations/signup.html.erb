@@ -1,0 +1,51 @@
+<div class="container mt-5" style="max-width: 600px;">
+  <h3>Sign Up to Join <%= @invitation.organization.name %></h3>
+
+  <%= form_with model: @user, url: organization_invite_signup_path(token: @invitation.token), method: :post, local: true do |f| %>
+    <div class="mb-3">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control", value: @invitation.email, readonly: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :date_of_birth %>
+      <%= f.date_field :date_of_birth, class: "form-control", required: true %>
+    </div>
+
+    <% if @invitation.organization.policy&.parental_consent_required %>
+      <div class="form-check mb-3">
+        <%= f.check_box :parental_consent, class: "form-check-input" %>
+        <%= f.label :parental_consent, "I have obtained parental consent", class: "form-check-label" %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "form-control", required: true %>
+    </div>
+
+    <%= f.submit "Create Account and Join Organization", class: "btn btn-primary" %>
+  <% end %>
+
+  <% if @invitation.organization.policy %>
+    <div class="alert alert-info">
+      <strong>Organization Policy:</strong><br>
+      <% if @invitation.organization.policy.min_age.present? %>
+        - Minimum Age: <%= @invitation.organization.policy.min_age %> years<br>
+      <% end %>
+      <% if @invitation.organization.policy.parental_consent_required %>
+        - Parental consent is required for underage users.<br>
+      <% end %>
+    </div>
+  <% end %>
+</div>

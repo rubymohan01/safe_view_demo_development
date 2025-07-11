@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <!-- Organization Details -->
+  <h2><%= @organization.name %></h2>
+  <p><strong>Description:</strong> <%= @organization.description.presence || "No description provided." %></p>
+  <p><strong>Status:</strong> <%= @organization.status.capitalize %></p>
+  <% if @organization.policy %>
+    <hr>
+    <h5>Organization Policy</h5>
+    <p>
+      Minimum Age: <%= @organization.policy.min_age || "Not set" %><br>
+      Parental Consent Required: <%= @organization.policy.parental_consent_required ? "Yes" : "No" %>
+    </p>
+  <% end %>
+
+  <!-- Activate if pending -->
+  <% if current_user.memberships.find_by(organization: @organization)&.admin? && @organization.pending? %>
+    <%= button_to 'Activate Organization', activate_organization_path(@organization), method: :patch, class: 'btn btn-success' %>
+  <% end %>
+
+  <!-- Invite Member Form -->
+  <% if current_user.is_org_admin? %>
+    <hr>
+    <h4>Invite a Member by Email</h4>
+    <%= form_with url: create_invite_organization_path(@organization), method: :post, local: true do |f| %>
+      <div class="input-group mb-3" style="max-width: 500px;">
+        <%= f.email_field :email, placeholder: "Enter user email", class: "form-control", required: true %>
+        <%= f.submit "Generate Invite Link", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <!-- Channels Section -->
+  <hr>
+  <h4>Channels</h4>
+  <% if @organization.channels.any? %>
+    <ul>
+      <% @organization.channels.each do |channel| %>
+        <li><%= link_to channel.name, channel_path(channel) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No channels yet.</p>
+  <% end %>
+</div>

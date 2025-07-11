@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Organizations</h2>
+    <%= link_to "Create New Organization", new_organization_path, class: "btn btn-success" %>
+  </div>
+
+  <div class="row">
+    <% @organizations.each do |organization| %>
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= organization.name %></h5>
+            <p><strong>Created:</strong> <%= organization.created_at.strftime("%b %d, %Y") %></p>
+
+            <% membership = current_user.memberships.find_by(organization: organization) %>
+            <% if membership&.admin? || membership&.super_admin? %>
+              <% if organization.pending? %>
+                <%= button_to "Activate Organization", activate_organization_path(organization), method: :patch, class: "btn btn-success mb-2" %>
+              <% end %>
+            <% end %>
+
+            <%= link_to "View", organization_path(organization), class: "btn btn-sm btn-primary" %>
+            <% if current_user.super_admin? || current_user.admin? %>
+              <%= link_to "Edit Organization", edit_organization_path(organization), class: "btn btn-warning" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

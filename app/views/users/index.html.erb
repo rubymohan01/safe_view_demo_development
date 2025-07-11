@@ -1,0 +1,29 @@
+<h1>All Users</h1>
+<%= link_to "New User", new_user_path, class: "btn btn-primary mb-3" %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Organization</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.name %></td>
+        <td><%= user.role.presence || 'N/A' %></td>
+        <td><%= user.organization&.name || 'None' %></td>
+        <td>
+          <%= link_to "Show", user_path(user), class: "btn btn-sm btn-info" %>
+          <%= link_to "Edit", edit_user_path(user), class: "btn btn-sm btn-warning" %>
+          <%= link_to "Delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

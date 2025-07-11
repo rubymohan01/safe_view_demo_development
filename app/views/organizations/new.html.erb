@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <h2>Create New Organization</h2>
+  <%= form_with(model: @organization, local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :admin_user_ids, "Admin Users" %>
+      <%= select_tag "organization[admin_user_ids][]",
+          options_from_collection_for_select(User.all, :id, :email),
+          multiple: true,
+          class: "form-select select-users" %>
+    </div>
+
+    <h4>Organization Policy</h4>
+
+    <%= form.fields_for :policy do |pf| %>
+      <div class="mb-3">
+        <%= pf.label :min_age, "Minimum Age" %>
+        <%= pf.number_field :min_age, class: "form-control", min: 0 %>
+      </div>
+
+      <div class="form-check mb-3">
+        <%= pf.check_box :parental_consent_required, class: "form-check-input" %>
+        <%= pf.label :parental_consent_required, "Require Parental Consent", class: "form-check-label" %>
+      </div>
+    <% end %>
+
+    <%= form.submit 'Create Organization', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+

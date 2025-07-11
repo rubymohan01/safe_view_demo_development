@@ -1,0 +1,18 @@
+<div class="container">
+  <h2><%= @video.title %></h2>
+
+  <% if @video.youtube_video_id.present? %>
+    <div class="ratio ratio-16x9 mb-3">
+      <iframe
+        src="https://www.youtube.com/embed/<%= @video.youtube_video_id %>"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </div>
+  <% elsif @video.file.attached? %>
+    <%= video_tag @video.file, controls: true, width: "100%", class: "mb-3" %>
+  <% else %>
+    <p class="text-danger">No video available.</p>
+  <% end %>
+
+  <p><%= @video.description %></p>
+</div>

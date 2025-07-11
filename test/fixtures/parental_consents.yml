@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  minor_user: one
+  guardian_user: one
+  status: MyString
+
+two:
+  minor_user: two
+  guardian_user: two
+  status: MyString

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  video: one
+  watched_at: 2025-07-10 02:42:10
+
+two:
+  user: two
+  video: two
+  watched_at: 2025-07-10 02:42:10

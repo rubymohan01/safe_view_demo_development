@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  channel: one
+  min_age: 1
+  visibility: 1
+  youtube_url: MyString
+
+two:
+  title: MyString
+  description: MyText
+  channel: two
+  min_age: 1
+  visibility: 1
+  youtube_url: MyString

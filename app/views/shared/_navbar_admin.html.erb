@@ -1,0 +1,17 @@
+<li class="nav-item">
+  <%= link_to "Dashboard", user_dashboard_path, class: "nav-link" %>
+</li>
+
+<% if current_user&.organizations.present? %>
+  <li class="nav-item">
+    <%= link_to "My Organization", organizations_path, class: "nav-link" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Channels", channels_path, class: "nav-link" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Videos", videos_path, class: "nav-link" %>
+  </li>
+<% end %>

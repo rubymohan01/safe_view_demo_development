@@ -1,0 +1,5 @@
+<h2><%= @organization.name %> Dashboard</h2>
+
+<% if current_user.is_org_admin? %>
+  <%= link_to "Invite Members", organization_invitation_path, class: "btn btn-primary mb-3" %>
+<% end %>

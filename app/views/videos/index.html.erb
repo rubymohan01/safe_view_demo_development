@@ -1,0 +1,47 @@
+<%= form_with url: videos_path, method: :get, local: true, class: "mb-4" do |form| %>
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <%= form.text_field :query, placeholder: "Search by title or channel...", class: "form-control", value: params[:query] %>
+    </div>
+    <div class="col-md-3">
+      <%= form.select :channel_id, options_from_collection_for_select(@channels, :id, :name, params[:channel_id]),
+                      { include_blank: "All Channels" },
+                      { class: "form-select" } %>
+    </div>
+    <div class="col-md-2">
+      <%= form.submit "Search", class: "btn btn-primary w-100" %>
+    </div>
+  </div>
+<% end %>
+
+
+<% if params[:channel_id].present? %>
+  <div class="text-center mt-3">
+    <%= link_to "Back to All Videos", videos_path, class: "btn btn-secondary btn-sm" %>
+  </div>
+<% end %>
+
+<div class="container mt-5" style="max-width: 1400px;">
+  <div class="row justify-content-center">
+    <% @videos.each do |video| %>
+      <div class="col-md-4 mb-4 d-flex">
+        <div class="card h-100 w-100">
+          <iframe class="card-img-top" height="200"
+                  src="<%= video.youtube_url.sub('watch?v=', 'embed/') %>"
+                  frameborder="0" allowfullscreen></iframe>
+          <div class="card-body">
+            <h5 class="card-title"><%= video.title %></h5>
+            <p class="card-text text-muted"><%= truncate(video.description, length: 80) %></p>
+            <p class="card-text">
+              Channel:
+              <%= link_to video.channel.name, videos_path(channel_id: video.channel_id), class: "text-primary" %>
+            </p>
+            <p class="card-text">
+              Min Age: <%= video.min_age %>+
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

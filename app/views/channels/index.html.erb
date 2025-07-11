@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Channels</h2>
+    <% if current_user.admin? || current_user.super_admin? %>
+      <%= link_to "Create New Channel", new_channel_path, class: "btn btn-success" %> 
+    <% end %>
+  </div>
+
+  <div class="row">
+    <% @channels.each do |channel| %>
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= channel.name %></h5>
+            <p><strong>Owned by:</strong> <%= channel.user.email %></p>
+            <p><strong>Organization:</strong> <%= channel.organization.name %></p>
+            <p><strong>Status:</strong> <%= channel.organization.status.titleize %></p>
+            <%if current_user.admin?%>
+            <% if channel.organization.status == 'active'%>
+            <%= link_to "Edit", edit_channel_path(channel), class: "btn btn-sm btn-secondary" %>
+
+            <%= link_to "View", channel_path(channel), class: "btn btn-sm btn-primary" %>
+            <% end %>
+            <%= link_to "Delete", channel_path(channel), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

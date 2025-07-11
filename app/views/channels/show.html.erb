@@ -1,0 +1,10 @@
+<div class="container mt-5">
+  <h2><%= @channel.name %></h2>
+  <p><strong>Description:</strong> <%= @channel.description %></p>
+  <p><strong>Owner:</strong> <%= @channel.user.email %></p>
+  <p><strong>Organization:</strong> <%= @channel.organization.name %></p>
+  <p><strong>Status:</strong> <%= @channel.organization.status.titleize %></p>
+
+  <%= link_to "Edit", edit_channel_path(@channel), class: "btn btn-secondary" %>
+  <%= link_to "Back", channels_path, class: "btn btn-outline-primary" %>
+</div>

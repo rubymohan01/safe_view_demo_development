@@ -1,0 +1,8 @@
+<h1><%= @user.name %></h1>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>DOB:</strong> <%= @user.date_of_birth %></p>
+<p><strong>Role:</strong> <%= @user.role || "None" %></p>
+<p><strong>Organization:</strong> <%= @user.organization&.name || "None" %></p>
+
+<%= link_to "Edit", edit_user_path(@user), class: "btn btn-warning" %>
+<%= link_to "Back", users_path, class: "btn btn-secondary" %>

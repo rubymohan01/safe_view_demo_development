@@ -1,0 +1,28 @@
+<%= form_with(model: [@channel.organization, @channel, @video]) do |f| %>
+  <div class="mb-3">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :youtube_url, "YouTube Video URL (optional)" %>
+    <%= f.text_field :youtube_url, class: 'form-control', placeholder: "https://youtube.com/watch?v=..." %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :file, "Or Upload Video File" %>
+    <%= f.file_field :file, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :visibility %>
+    <%= f.select :visibility, Video.visibilities.keys.map { |k| [k.humanize, k] }, {}, class: 'form-control' %>
+  </div>
+
+  <%= f.submit "Save", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,23 @@
+.select2-container--bootstrap4 .select2-selection__clear {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.select2-container--bootstrap4 .select2-selection__choice__remove {
+  background: none !important;
+  border: none !important;
+  color: #aaa !important;
+  font-size: 1rem !important;
+  padding: 0 4px;
+  cursor: pointer;
+}
+
+.select2-container--bootstrap4 .select2-selection__choice__remove:hover {
+  color: #555 !important;
+  background-color: transparent !important;
+}
