@@ -1,18 +1,18 @@
 
-# 🎥 SafeView — Secure Video Platform for All Ages
+# SafeView — Secure Video Platform for All Ages
 
 **SafeView** is a custom video-sharing platform built with Ruby on Rails that enforces **organization-based access control**, **age-based participation policies**, and **parental consent workflows**.
 
 ---
 
-## 🔧 Features Implemented
+## Features Implemented
 
-### ✅ Organization-Based Access Control
+### Organization-Based Access Control
 - Users can only view **channels and videos** belonging to their organization.
 - **Admins** can invite users to their organization via a secure **invitation link**.
 - **Super Admin** has full access to all organizations, users, and analytics.
 
-### ✅ Age-Based Participation Rules
+### Age-Based Participation Rules
 - Age is collected during signup via `date_of_birth`.
 - Videos are filtered based on age groups:
   - **Child (0–12)**
@@ -20,16 +20,16 @@
   - **Adult (18+)**
 - Users under 18 require **parental consent** to access adult content.
 
-### ✅ Parental Consent System
+### Parental Consent System
 - Minor users without parental consent are restricted from viewing 18+ videos.
 - Consent is managed via `ParentalConsent` model connecting minors to guardians.
 
-### ✅ Invitation Flow
+### Invitation Flow
 - Admin searches for an existing user by email.
 - Generates a **secure invitation link**.
 - User visits the link, signs up (or logs in), and is added to the organization.
 
-### ✅ Admin & User Dashboards
+### Admin & User Dashboards
 - Super Admin sees:
   - Total videos, channels, organizations
   - Video stats by age group
@@ -43,7 +43,7 @@
 
 ---
 
-## 📦 Tech Stack
+## Tech Stack
 
 - **Ruby:** 3.3.7
 - **Rails:** 7.1.5.1
@@ -54,7 +54,7 @@
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone & Install
 
@@ -83,7 +83,13 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 👤 User Roles
+### 3. Start the App
+creadential:
+1. email: super@admin.com, password: password, role: super admin
+2. email: admin@youth.com, password: password, role: admin
+3. email: teen@youth.com, password: password,  role: user
+
+##  User Roles
 
 | Role         | Capabilities |
 |--------------|--------------|
@@ -93,7 +99,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🧩 Key Models
+## Key Models
 
 - `User` — with `role`, `date_of_birth`, `organization_id`
 - `Organization`, `Membership` — links users to orgs
@@ -104,7 +110,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📊 Dashboard Snapshots
+## Dashboard Snapshots
 
 ### Super Admin Dashboard
 - See total organizations, videos, channels
@@ -120,31 +126,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📁 Directory Highlights
-
-```
-app/
-├── controllers/
-│   ├── dashboards_controller.rb
-│   ├── videos_controller.rb
-│   ├── organization_invitations_controller.rb
-│   └── organizations_controller.rb
-├── models/
-│   ├── user.rb
-│   ├── organization.rb
-│   ├── video.rb
-│   ├── parental_consent.rb
-├── views/
-│   ├── dashboards/
-│   ├── videos/
-│   ├── organizations/
-│   ├── organization_invitations/
-│   └── shared/
-```
-
----
-
-## 🔐 Parental Consent Workflow
+## Parental Consent Workflow
 
 - Users under 18 require parental approval.
 - Without consent:
@@ -152,23 +134,5 @@ app/
 - With consent:
   - Full access to appropriate videos.
 
----
-
-## ✅ To-Do / Enhancements
-
-- [ ] Add email notifications for invitation
-- [ ] Add analytics charts to dashboard
-- [ ] Add file upload support for non-YouTube content
-- [ ] Admin audit logs
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome. Please ensure you follow good Git practices and test thoroughly.
-
----
-
-## 📜 License
-
-MIT License © 2025 SafeView Team
+## Parental Consent Workflow
+- Safe View Demo:- https://www.loom.com/share/4085e25bce814170b71811f4306b3528?sid=135be1bd-632f-457b-a0cf-4a983c3bde6e

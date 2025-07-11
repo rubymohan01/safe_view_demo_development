@@ -1,13 +1,10 @@
-# app/controllers/organization_invitations_controller.rb
 class OrganizationInvitationsController < ApplicationController
   before_action :authenticate_user!, except: [:signup, :create_user_from_invite]
 
-  # List pending invites for the logged-in user
   def index
     @invitations = OrganizationInvitation.where(email: current_user.email)
   end
 
-  # Step 1: Show confirmation screen
   def accept
     @invitation = OrganizationInvitation.find_by(token: params[:token])
 
@@ -19,10 +16,8 @@ class OrganizationInvitationsController < ApplicationController
       redirect_to root_path, alert: "Invitation already accepted." and return
     end
 
-    # Show confirmation page (accept.html.erb)
   end
 
-  # Step 2: Confirm and join the organization
   def confirm
     @invitation = OrganizationInvitation.find_by(token: params[:token])
 
@@ -46,7 +41,6 @@ class OrganizationInvitationsController < ApplicationController
       redirect_to root_path, alert: "Invalid or expired invitation." and return
     end
 
-    # Force logout of current user if anyone is signed in
     sign_out(current_user) if user_signed_in?
 
     @user = User.new(email: @invitation.email)
@@ -67,7 +61,6 @@ class OrganizationInvitationsController < ApplicationController
     @user.email = @invitation.email
     @user.organization_id = @invitation.organization_id
 
-    # --- Policy Check ---
     policy = @invitation.organization.policy
     age = calculate_age(@user.date_of_birth)
 
